@@ -1,0 +1,17 @@
+#include <iostream>
+#include <string>
+#include <regex>
+using namespace std;
+
+int main() {
+  string one, two, three, four, five;
+  
+  cout << "Enter a Statement: ";
+  cin >> one >> two >> three >> four >> five;
+
+  string array[5] = {one, two, three, four, five};
+
+  cout << one << " " << two << " " << three << " " << four << " " << five;
+  
+  return 0;
+}
