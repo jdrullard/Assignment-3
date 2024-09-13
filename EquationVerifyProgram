@@ -33,6 +33,7 @@ bool isEqSign(string input) {
     return false;
   }
 };
+
 // checks if 5 terms are syntactically valid
 void syntaxScanner(string array[5]) {
   int numEq = 0;
