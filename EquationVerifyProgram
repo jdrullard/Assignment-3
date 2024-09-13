@@ -1,7 +1,82 @@
+// joshua drullard, liza mladentseva, faizah muthana
+// comp 141, assignment 3, september 9 2024
+// program parses & solves arithmetic statements using BNF grammar
+
 #include <iostream>
 #include <string>
 #include <regex>
 using namespace std;
+
+// checks to see if input for numerics is valid 
+bool isNum(string input) {
+  regex numberRegex("[0-9]+");
+  return regex_match(input, numberRegex);
+}
+// checks to see if input for variables is valid 
+bool isVar(string input) {
+  regex variableRegex("(_|[a-zA-Z])([a-zA-Z0-9_])*");
+  return regex_match(input, variableRegex);
+}
+  
+bool isOp(string input) {
+  if(input[0] == '+' || input[0] == '-' || input[0] == '*' || input[0] == '/') {
+    return true;
+  }
+  return false;
+};
+
+bool isEqSign(string input) {
+  if(input[0] == '=') {
+    return true;
+  }
+  else {
+    return false;
+  }
+};
+// checks if 5 terms are syntactically valid
+void syntaxScanner(string array[5]) {
+  int numEq = 0;
+  int numOp = 0;
+  bool isCorrect = false;
+  for (int i=0; i <= 5; ++i) {
+    if (isEqSign(array[i])) {
+      isCorrect = true;
+      numEq++;
+    }
+    else if (isOp(array[i])) {
+      isCorrect = true;
+      numOp++;
+    }
+    else if (isNum(array[i])) {
+      isCorrect = true;
+    }
+    else if (isVar(array[i])) {
+      isCorrect = true;
+    }
+    else {
+      isCorrect = false;
+      break;
+    }
+  }
+  if (isCorrect) {
+    if (numEq == 1 && numOp == 1) {
+      cout << "Syntactically Valid" << endl;
+    }
+    else if (numEq == 0) {
+      cout << "Syntax Error: Expected an equal sign" << endl;
+    }
+    else {
+      cout << "Syntax Error: Expected an operator" << endl;
+    }
+  }
+  else {
+    cout << "Syntax Invalid" << endl;
+  }
+};
+
+string semanticScanner {
+  
+};
 
 int main() {
   string one, two, three, four, five;
@@ -10,8 +85,13 @@ int main() {
   cin >> one >> two >> three >> four >> five;
 
   string array[5] = {one, two, three, four, five};
+  
+  // test print
+  cout << one << " " << two << " " << three << " " << four << " " << five << endl;
+  
+  syntaxScanner(array);
+  //cout << semanticScanner(input) << endl;
 
-  cout << one << " " << two << " " << three << " " << four << " " << five;
   
   return 0;
 }
